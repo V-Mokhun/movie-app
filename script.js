@@ -6,9 +6,9 @@ let currentType;
 const API_KEY = `api_key=04c35731a5ee918f014970082a0088b1`;
 const TOP_MOVIES = `https://api.themoviedb.org/3/movie/top_rated?${API_KEY}&language=en-US&page=${page}`;
 const UPCOMING_MOVIES = `https://api.themoviedb.org/3/movie/upcoming?${API_KEY}&language=en-US&page=${page}`;
-const POPULAR_MOVIES = `http://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&${API_KEY}&page=${page}`;
+const POPULAR_MOVIES = `http://api.themoviedb.org/3/discover/movie?/sort_by=popularity.desc&${API_KEY}&page=${page}`;
 const IMAGE_PATH = `https://image.tmdb.org/t/p/w1280`;
-const SEARCH_API = `http://api.themoviedb.org/3/search/movie?&api_key=04c35731a5ee918f014970082a0088b1&query=`;
+const SEARCH_API = `http://api.themoviedb.org/3/search/movie?/&api_key=04c35731a5ee918f014970082a0088b1&query=`;
 
 const main = document.querySelector(".main");
 const moviesTypesContainer = document.querySelector(".types");
