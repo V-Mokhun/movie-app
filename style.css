@@ -218,6 +218,9 @@ body {
 	display: flex;
 	justify-content: space-between;
 	flex-wrap: wrap;
+	opacity: 1;
+	visibility: visible;
+	margin: 0px 0px 25px 0px;
 }
 
 .movie {
@@ -271,4 +274,42 @@ body {
 .movie__title {
 	color: #fff;
 	font-size: 22px;
+}
+
+.pagination {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0px 0px 30px 0px;
+}
+
+.pagination-button {
+	margin: 0px 15px;
+	padding: 5px 10px;
+	border-radius: 5px;
+	color: #fff;
+	background: rgb(39, 82, 211);
+	transition: background .3s linear;
+}
+
+.pagination-button:hover {
+	background: rgb(31, 63, 161);
+}
+
+.pagination-button--curr {
+	background: rgb(10, 34, 104);
+	transform: scale(1.3);
+}
+
+.pagination-button--curr:hover {
+	background: rgb(10, 34, 104);
+}
+
+.dots {
+	font-size: 20px;
+	color: #fff;
+}
+
+.pagination-button.hide, .dots.hide {
+	display: none;
 }

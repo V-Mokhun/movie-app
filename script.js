@@ -1,5 +1,7 @@
 "use strict";
 let page = 1;
+let totalPages = 0;
+let currentType;
 const API_KEY = `api_key=04c35731a5ee918f014970082a0088b1`;
 const TOP_MOVIES = `https://api.themoviedb.org/3/movie/top_rated?${API_KEY}&language=en-US&page=${page}`;
 const UPCOMING_MOVIES = `https://api.themoviedb.org/3/movie/upcoming?${API_KEY}&language=en-US&page=${page}`;
@@ -11,6 +13,14 @@ const main = document.querySelector(".main");
 const moviesTypesContainer = document.querySelector(".types");
 const form = document.querySelector(".form");
 const preloader = document.querySelector(".preloader");
+const pagination = document.querySelector(".pagination");
+const paginationFirst = document.querySelector(".pagination-button--first");
+const paginationPrev = document.querySelector(".pagination-button--prev");
+const paginationCurr = document.querySelector(".pagination-button--curr");
+const paginationNext = document.querySelector(".pagination-button--next");
+const paginationLast = document.querySelector(".pagination-button--last");
+const paginationDotsStart = document.querySelector(".dots-start");
+const paginationDotsEnd = document.querySelector(".dots-end");
 
 window.onload = function () {
   preloader.classList.add("hide");
@@ -18,12 +28,73 @@ window.onload = function () {
 
 getMovies(TOP_MOVIES);
 
+function setPagination(numberOfPages) {
+  // display all buttons
+  [...pagination.children].forEach((child) => child.classList.remove("hide"));
+
+  // set contents for all buttons
+  paginationFirst.textContent = 1;
+  paginationPrev.textContent = page - 1;
+  paginationCurr.textContent = page;
+  paginationNext.textContent = page + 1;
+  paginationLast.textContent = numberOfPages;
+
+  // hide some buttons if needed
+
+  if (page === 1) {
+    paginationFirst.classList.add("hide");
+    paginationPrev.classList.add("hide");
+  }
+
+  if (page === 2) {
+    paginationPrev.classList.add("hide");
+  }
+
+  if (page < 4) paginationDotsStart.classList.add("hide");
+
+  if (page === numberOfPages - 1) paginationLast.classList.add("hide");
+
+  if (page === numberOfPages) {
+    paginationNext.classList.add("hide");
+    paginationLast.classList.add("hide");
+  }
+
+  if (numberOfPages - page < 3) paginationDotsEnd.classList.add("hide");
+}
+
+pagination.addEventListener("click", (e) => {
+  const paginationBtn = e.target.closest(".pagination-button");
+  if (!paginationBtn) return;
+
+  // logic for pagination and page changing
+
+  if (paginationBtn === paginationFirst) {
+    page = 1;
+    getMovies(currentType + page);
+  }
+  if (paginationBtn === paginationPrev) {
+    page--;
+    getMovies(currentType + page);
+  }
+  if (paginationBtn === paginationCurr) return;
+
+  if (paginationBtn === paginationNext) {
+    page++;
+    getMovies(currentType + page);
+  }
+  if (paginationBtn === paginationLast) {
+    page = totalPages;
+    getMovies(currentType + page);
+  }
+});
+
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   const searchInput = form.querySelector(".search");
   if (!searchInput.value) return;
 
   removeActiveClasses();
+  // get search result
   getMovies(SEARCH_API + searchInput.value);
   searchInput.value = "";
 });
@@ -58,13 +129,24 @@ async function getMovies(typeOfMovies) {
     const response = await fetch(typeOfMovies);
     const responseData = await response.json();
 
+    // if no movies found
     if (responseData.results.length < 1) {
       setErrorMessage("Could not find any movie with that name. Try Again!");
       return;
     }
 
+    // display pagination properly
+    totalPages = responseData.total_pages;
+    setPagination(totalPages);
+
     // show movies
     showMovies(responseData.results);
+
+    if (typeOfMovies.includes("&page=")) {
+      currentType = typeOfMovies.replace(/\d+$/, ""); // normal situation
+    } else {
+      currentType = `${typeOfMovies}&page=${page}`; // search result situtation
+    }
   } catch (err) {
     // just in case
     console.error(err);
