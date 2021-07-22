@@ -131,7 +131,6 @@ async function getMovies(typeOfMovies) {
     // get the data
     const response = await fetch(typeOfMovies);
     const responseData = await response.json();
-    console.log(responseData);
 
     // if no movies found
     if (responseData.results.length < 1) {
