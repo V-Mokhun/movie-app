@@ -113,6 +113,11 @@ body {
 
 .button {
 	background: transparent;
+	padding: 5px;
+}
+
+.button:focus {
+	outline: 2px solid black;
 }
 
 .title {
@@ -336,7 +341,7 @@ body {
 	transition: background .3s linear;
 }
 
-.pagination-button:hover {
+.pagination-button:hover, .pagination-button:focus {
 	background: rgb(31, 63, 161);
 }
 
@@ -383,17 +388,17 @@ body {
 	.title {
 		font-size: 1.8rem;
 	}
-	.types{
+	.types {
 		justify-content: center;
 	}
 	.types__btn {
 		font-size: 1rem;
 	}
-	.pagination-button{
+	.pagination-button {
 		margin: 0px 7px;
 		padding: 5px 8px;
 	}
-	.dots{
+	.dots {
 		font-size: 18px;
 	}
 }

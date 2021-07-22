@@ -95,6 +95,7 @@ form.addEventListener("submit", (e) => {
   if (!searchInput.value) return;
 
   removeActiveClasses();
+  page = 1;
   // get search result
   getMovies(SEARCH_API + searchInput.value);
   searchInput.value = "";
@@ -109,6 +110,7 @@ moviesTypesContainer.addEventListener("click", (e) => {
 
   // give active to clicked btn
   removeActiveClasses();
+  page = 1;
   btn.classList.add("active");
 
   // get proper movies
@@ -147,7 +149,7 @@ async function getMovies(typeOfMovies) {
     if (typeOfMovies.includes("&page=")) {
       currentType = typeOfMovies.replace(/\d+$/, ""); // normal situation
     } else {
-      currentType = `${typeOfMovies}&page=${page}`; // search result situtation
+      currentType = `${typeOfMovies}&page=`; // search result situtation
     }
   } catch (err) {
     // just in case
@@ -167,6 +169,8 @@ function showMovies(data) {
       release_date: releaseDate,
       overview,
     } = movie;
+
+    if (!posterPath || !releaseDate) return;
 
     // create movie element
     const movieEl = document.createElement("div");
