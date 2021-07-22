@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <script defer src="script.js"></script>
+        <title>Movie App</title>
+    </head>
+    <body>
+        <header class="header">
+            <form class="form">
+                <input
+                    aria-label="search"
+                    role="search"
+                    type="text"
+                    name="search"
+                    class="search"
+                    placeholder="Search a movie"
+                >
+                <button type="submit" class="button" aria-label="search">
+                    <img aria-hidden="true" src="search.png" alt="">
+                </button>
+            </form>
+        </header>
+        <div class="wrapper">
+            <h3 class="title">
+                Click to get movies u want
+            </h3>
+            <div class="types">
+                <button class="types__btn top-movies active">Top Movies</button>
+                <button class="types__btn popular-movies">Popular Movies</button>
+                <button class="types__btn upcoming-movies">Upcoming Movies</button>
+            </div>
+            <main class="main"></main>
+        </div>
+    </body>
+</html>
