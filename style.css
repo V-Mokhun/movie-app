@@ -110,17 +110,67 @@ body {
 	background: #193649;
 }
 
-.button{
+.button {
 	background: transparent;
 }
 
-.title{
-	color:#fff;
+.title {
+	color: #fff;
 	font-size: 3rem;
 	margin: 0px 0px 30px 15px;
 }
 
-.error-message{
+.preloader {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 10;
+	opacity: 1;
+	visibility: visible;
+	transition: opacity .3s linear;
+}
+
+.preloader::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 0;
+	background: rgba(0, 0, 0, 0.95);
+	z-index: 9;
+}
+
+.preloader.hide {
+	opacity: 0;
+	visibility: hidden;
+}
+
+.preloader img {
+	max-width: 100%;
+	height: auto;
+	object-fit: cover;
+	animation: spin linear 1s infinite running;
+	position: relative;
+	z-index: 11;
+}
+
+@keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.error-message {
 	font-size: 2.25rem;
 	text-align: center;
 	color: rgb(197, 9, 9);
@@ -131,7 +181,7 @@ body {
 	align-items: center;
 }
 
-.error-message::before{
+.error-message::before {
 	content: '';
 	position: absolute;
 	left: 0;

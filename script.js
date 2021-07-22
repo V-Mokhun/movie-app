@@ -10,11 +10,11 @@ const SEARCH_API = `http://api.themoviedb.org/3/search/movie?&api_key=04c35731a5
 const main = document.querySelector(".main");
 const moviesTypesContainer = document.querySelector(".types");
 const form = document.querySelector(".form");
-console.log("not loaded");
+const preloader = document.querySelector(".preloader");
 
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("loaded");
-});
+window.onload = function () {
+  preloader.classList.add("hide");
+};
 
 getMovies(TOP_MOVIES);
 
@@ -73,6 +73,7 @@ async function getMovies(typeOfMovies) {
 
 function showMovies(data) {
   main.innerHTML = "";
+
   data.forEach((movie) => {
     // get needed info about movie
     const {
