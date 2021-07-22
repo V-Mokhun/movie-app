@@ -99,6 +99,7 @@ body {
 	min-width: 400px;
 	margin: 0px 15px 0px 0px;
 	padding: 5px 10px;
+	width: 100%;
 }
 
 .search::placeholder {
@@ -193,12 +194,15 @@ body {
 }
 
 .types {
-	margin: 0px 0px 35px 15px;
+	margin: 0px 0px 15px 15px;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
 }
 
 .types__btn {
 	padding: 10px 20px;
-	margin: 0px 20px 0px 0px;
+	margin: 0px 20px 20px 0px;
 	color: #fff;
 	font-size: 2rem;
 	background: #174866;
@@ -225,7 +229,7 @@ body {
 
 .movie {
 	position: relative;
-	margin: 0px 15px 30px;
+	margin: 0px 12px 30px;
 	max-width: 290px;
 }
 
@@ -242,6 +246,8 @@ body {
 
 .movie__img-wrapper {
 	position: relative;
+	max-height: 400px;
+	overflow: hidden;
 }
 
 .movie__img-wrapper::after {
@@ -253,6 +259,16 @@ body {
 	right: 0;
 	background: rgba(0, 0, 0, 0.45);
 	z-index: 1;
+	transform: translateY(0);
+	transition: transform .3s linear;
+}
+
+.movie__img-wrapper:hover::after {
+	transform: translateY(-100%);
+}
+
+.movie__img-wrapper:hover .movie__description {
+	transform: translateY(0);
 }
 
 .movie__img {
@@ -260,9 +276,13 @@ body {
 	position: relative;
 	width: 100%;
 	max-height: 400px;
+	height: auto;
 	object-fit: cover;
 	border-radius: 5px;
-	margin: 0px 0px 15px 0px;
+}
+
+.movie__info {
+	margin: 15px 0px 0px 0px;
 }
 
 .movie__date {
@@ -274,6 +294,30 @@ body {
 .movie__title {
 	color: #fff;
 	font-size: 22px;
+}
+
+.movie__description {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	background: #fff;
+	color: #000;
+	padding: 10px;
+	line-height: 1.1;
+	max-height: 100%;
+	overflow-y: auto;
+	transform: translateY(100%);
+	transition: transform .3s linear;
+	z-index: 5;
+}
+
+.movie__description h4 {
+	font-size: 20px;
+	margin: 0px 0px 15px 0px;
+}
+
+.movie__description p {
+	font-size: 17px;
 }
 
 .pagination {
@@ -312,4 +356,44 @@ body {
 
 .pagination-button.hide, .dots.hide {
 	display: none;
+}
+
+@media (max-width:991px) {
+	.main {
+		justify-content: center;
+	}
+	.title {
+		font-size: 2.2rem;
+	}
+	.types__btn {
+		font-size: 1.3rem;
+	}
+}
+
+@media (max-width:600px) {
+	.header {
+		padding: 10px 20px;
+		margin: 0px 0px 20px 0px;
+	}
+	.search {
+		min-height: 0;
+		min-width: 0;
+		font-size: 20px;
+	}
+	.title {
+		font-size: 1.8rem;
+	}
+	.types{
+		justify-content: center;
+	}
+	.types__btn {
+		font-size: 1rem;
+	}
+	.pagination-button{
+		margin: 0px 7px;
+		padding: 5px 8px;
+	}
+	.dots{
+		font-size: 18px;
+	}
 }

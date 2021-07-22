@@ -2,6 +2,7 @@
 let page = 1;
 let totalPages = 0;
 let currentType;
+
 const API_KEY = `api_key=04c35731a5ee918f014970082a0088b1`;
 const TOP_MOVIES = `https://api.themoviedb.org/3/movie/top_rated?${API_KEY}&language=en-US&page=${page}`;
 const UPCOMING_MOVIES = `https://api.themoviedb.org/3/movie/upcoming?${API_KEY}&language=en-US&page=${page}`;
@@ -128,6 +129,7 @@ async function getMovies(typeOfMovies) {
     // get the data
     const response = await fetch(typeOfMovies);
     const responseData = await response.json();
+    console.log(responseData);
 
     // if no movies found
     if (responseData.results.length < 1) {
@@ -163,6 +165,7 @@ function showMovies(data) {
       title,
       poster_path: posterPath,
       release_date: releaseDate,
+      overview,
     } = movie;
 
     // create movie element
@@ -172,6 +175,10 @@ function showMovies(data) {
 				<span class="movie__rating">${voteAverage}</span>
 				<div class="movie__img-wrapper">
 				<img src="${IMAGE_PATH + posterPath}" alt="${title}" class="movie__img">
+				<div class="movie__description">
+					<h4>${title}</h4>
+					<p>${overview}</p>
+				</div>
 				</div>
 				<div class="movie__info">
 					<div class="movie__date">${releaseDate.slice(0, 4)}</div>
